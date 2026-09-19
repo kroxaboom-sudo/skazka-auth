@@ -4,24 +4,37 @@
 
 ## RU
 
-Переиспользуемый Android-контур авторизации и управления сессией.
+Переиспользуемый контур авторизации, вынесенный из Skazka Hub без production endpoints и app-specific UI.
 
-**Текущий статус:** репозиторий создан как целевая граница модуля. Рабочий код переносится из существующих проектов поэтапно, с тестами и без копирования project-specific зависимостей.
+**Статус:** `0.1.0-preview` — два независимых модуля уже собираются на HOSTKEY.
 
-**Граница модуля:** browser/custom-tab/deep-link return, session state, auth contracts; без production credentials.
+- `auth-core` — PKCE S256, state, callback validation и проверка HTTPS base URL. Чистая Java 17, без runtime-зависимостей.
+- `auth-android` — шифрованное хранение bearer session и pending PKCE через Android Keystore.
+- UI, список провайдеров, RuntimePack и профиль пользователя остаются на уровне приложения/сервера.
 
-Перед первым стабильным релизом здесь появятся собственные versioning, тесты, changelog и лицензия. До выбора лицензии публикация кода не означает автоматическое разрешение на его повторное использование.
+Проверено: core self-test — PASS; `:auth-android:assembleDebug` — PASS.
 
 ## EN
 
-Reusable Android authentication and session-management flow.
+Reusable authentication building blocks extracted from Skazka Hub without production endpoints or app-specific UI.
 
-**Current status:** this repository is the target module boundary. Working code is being extracted from existing projects incrementally, with tests and without copying project-specific dependencies.
+**Status:** `0.1.0-preview` — both modules build successfully on HOSTKEY.
 
-**Module boundary:** browser/custom-tab/deep-link return, session state, auth contracts; без production credentials.
+- `auth-core` — PKCE S256, state, callback validation, and HTTPS base URL validation. Pure Java 17 with no runtime dependencies.
+- `auth-android` — encrypted bearer-session and pending-PKCE storage backed by Android Keystore.
+- UI, provider lists, RuntimePack, and user-profile presentation stay at the app/server layer.
 
-Before the first stable release, this repository will get its own versioning, tests, changelog, and license. Until a license is selected, publishing the source does not automatically grant reuse rights.
+Verified: core self-test — PASS; `:auth-android:assembleDebug` — PASS.
 
-## Development rules / Правила разработки
+## Coordinates / Координаты
+
+- `com.kroxaboom.skazka:auth-core:0.1.0-preview`
+- `com.kroxaboom.skazka:auth-android:0.1.0-preview`
+
+## Security boundary / Граница безопасности
+
+Provider secrets, passwords, cookies, signing keys, private routes, and production configuration are not part of this repository.
 
 See [DEVELOPMENT_RULES.md](DEVELOPMENT_RULES.md).
+
+> A license will be selected before the first stable public release. Until then, publication of the source does not grant reuse rights.
