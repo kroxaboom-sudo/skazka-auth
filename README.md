@@ -4,36 +4,41 @@
 
 ## RU
 
-Переиспользуемый контур авторизации, вынесенный из Skazka Hub без production endpoints и app-specific UI.
+Переиспользуемый контур авторизации Skazka, вынесенный из Skazka Hub.
 
-**Статус:** `0.1.0-preview` — два независимых модуля уже собираются на HOSTKEY.
+Репозиторий разделён на два слоя:
 
-- `auth-core` — PKCE S256, state, callback validation и проверка HTTPS base URL. Чистая Java 17, без runtime-зависимостей.
-- `auth-android` — шифрованное хранение bearer session и pending PKCE через Android Keystore.
-- UI, список провайдеров, RuntimePack и профиль пользователя остаются на уровне приложения/сервера.
+- `auth-core` — чистая Java: PKCE, state/callback validation, проверка HTTPS base URL;
+- `auth-android` — Android Keystore + локальное хранение bearer-сессии и pending PKCE.
 
-Проверено: core self-test — PASS; `:auth-android:assembleDebug` — PASS; `:auth-android:lintDebug` — PASS.
+UI, список провайдеров, Runtime Config и production endpoints намеренно остаются за пределами библиотеки.
+
+**Статус:** `0.1.0-preview`. Auth Core self-test PASS; `:auth-android:assembleDebug` собран на HOSTKEY, AAR сформирован.
 
 ## EN
 
-Reusable authentication building blocks extracted from Skazka Hub without production endpoints or app-specific UI.
+Reusable Skazka authentication components extracted from Skazka Hub.
 
-**Status:** `0.1.0-preview` — both modules build successfully on HOSTKEY.
+The repository has two layers:
 
-- `auth-core` — PKCE S256, state, callback validation, and HTTPS base URL validation. Pure Java 17 with no runtime dependencies.
-- `auth-android` — encrypted bearer-session and pending-PKCE storage backed by Android Keystore.
-- UI, provider lists, RuntimePack, and user-profile presentation stay at the app/server layer.
+- `auth-core` — pure Java: PKCE, state/callback validation, HTTPS base URL validation;
+- `auth-android` — Android Keystore-backed bearer session and pending PKCE storage.
 
-Verified: core self-test — PASS; `:auth-android:assembleDebug` — PASS; `:auth-android:lintDebug` — PASS.
+UI, provider selection, Runtime Config, and production endpoints intentionally stay outside the library.
+
+**Status:** `0.1.0-preview`. Auth Core self-test passes; `:auth-android:assembleDebug` has been built on HOSTKEY and produced an AAR.
 
 ## Coordinates / Координаты
 
-- `com.kroxaboom.skazka:auth-core:0.1.0-preview`
-- `com.kroxaboom.skazka:auth-android:0.1.0-preview`
+- `com.kroxaboom.skazka:skazka-auth-core:0.1.0-preview`
+- `com.kroxaboom.skazka:skazka-auth-android:0.1.0-preview`
 
-## Security boundary / Граница безопасности
+## Verification / Проверка
 
-Provider secrets, passwords, cookies, signing keys, private routes, and production configuration are not part of this repository.
+```bash
+bash ci/verify-core.sh
+gradle :auth-android:assembleDebug
+```
 
 See [DEVELOPMENT_RULES.md](DEVELOPMENT_RULES.md).
 
