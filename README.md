@@ -12,7 +12,7 @@
 - `auth-android` — шифрованное хранение bearer session и pending PKCE через Android Keystore.
 - UI, список провайдеров, RuntimePack и профиль пользователя остаются на уровне приложения/сервера.
 
-Проверено: core self-test — PASS; `:auth-android:assembleDebug` — PASS.
+Проверено: core self-test — PASS; `:auth-android:assembleDebug` — PASS; `:auth-android:lintDebug` — PASS.
 
 ## EN
 
@@ -24,7 +24,7 @@ Reusable authentication building blocks extracted from Skazka Hub without produc
 - `auth-android` — encrypted bearer-session and pending-PKCE storage backed by Android Keystore.
 - UI, provider lists, RuntimePack, and user-profile presentation stay at the app/server layer.
 
-Verified: core self-test — PASS; `:auth-android:assembleDebug` — PASS.
+Verified: core self-test — PASS; `:auth-android:assembleDebug` — PASS; `:auth-android:lintDebug` — PASS.
 
 ## Coordinates / Координаты
 
