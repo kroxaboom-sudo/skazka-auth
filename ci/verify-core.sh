@@ -4,7 +4,7 @@ set -euo pipefail
 rm -rf build/self-test
 mkdir -p build/self-test
 
-javac -d build/self-test \
+javac -encoding UTF-8 -d build/self-test \
   auth-core/src/main/java/com/kroxaboom/skazka/auth/*.java \
   tests/AuthCoreSelfTest.java
 
