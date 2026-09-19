@@ -1,7 +1,8 @@
 plugins {
-    id 'java-library' apply false
     id 'com.android.library' version '8.7.3' apply false
 }
 
-group = 'com.kroxaboom.skazka'
-version = '0.1.0-preview'
+allprojects {
+    group = 'com.kroxaboom.skazka'
+    version = '0.1.0-preview'
+}
